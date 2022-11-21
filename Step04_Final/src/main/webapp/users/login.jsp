@@ -1,19 +1,46 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@page import="test.users.dao.UsersDao"%>
+<%@page import="test.users.dto.UsersDto"%>
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
 <%
-	//1. í¼ ì „ì†¡ë˜ëŠ” ì•„ì´ë””, ë¹„ë°€ë²ˆí˜¸ ì½ì–´ì˜¤ê¸°
-	
-	//2. DB ì— ì‹¤ì œë¡œ ì¡´ìž¬í•˜ëŠ” ë§žëŠ” ì •ë³´ì¸ì§€ í™•ì¸ í•œë‹¤. (ë§žëŠ” ì •ë³´ì´ë©´ ë¡œê·¸ì¸ ì²˜ë¦¬ë„ í•œë‹¤.)
-	
-	//3. ì‘ë‹µ
+   // 1. Æû Àü¼ÛµÇ´Â ¾ÆÀÌµð, ºñ¹Ð¹øÈ£ ÀÐ¾î¿À±â
+   request.setCharacterEncoding("utf-8");
+   String id = request.getParameter("id");
+   String pwd = request.getParameter("pwd");
+
+   UsersDto dto = new UsersDto();
+   dto.setId(id);
+   dto.setPwd(pwd);
+   // 2. DB¿¡ ½ÇÁ¦·Î Á¸ÀçÇÏ´Â ¸Â´Â Á¤º¸ÀÎÁö È®ÀÎÇÑ´Ù.(¸Â´Â Á¤º¸ÀÌ¸é ·Î±×ÀÎÃ³¸® ÇÑ´Ù.)
+   boolean isValid= UsersDao.getInstance().isValid(dto);
+   if(isValid){
+	  //session scope ¿¡ id ¶ó´Â Å°°ªÀ¸·Î ·Î±×ÀÎµÈ ¾ÆÀÌµð ´ã±â
+      session.setAttribute("id", id);
+   }
+   
+   // 3. ÀÀ´ä
 %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta charset="EUC-KR">
 <title>/users/login.jsp</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 </head>
 <body>
-
+   <div class="container">
+      <%if(isValid) {%>
+         <p class="alert alert-success">
+            <strong><%=dto.getId() %></strong> ´Ô ·Î±×ÀÎµÇ¾ú½À´Ï´Ù.
+            <a href="${pageContext.request.contextPath }/index.jsp">È¨À¸·Î °¡±â</a>
+         </p>
+      <%}else{ %>
+         <p class="alert alert-danger">
+            ·Î±×ÀÎ ½ÇÆÐ
+            <a href="loginform.jsp">´Ù½Ã ·Î±×ÀÎ ÇÏ±â</a>            
+         </p>
+      <%} %>
+   </div>
 </body>
 </html>
