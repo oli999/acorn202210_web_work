@@ -5,13 +5,13 @@
     pageEncoding="UTF-8"%>
 <%
 
+	request.setCharacterEncoding("utf-8");
 	//로그인후 가야할 목적지 정보
 	String url=request.getParameter("url");
 	//로그인 실패를 대비해서 목적지 정보를 인코딩한 결과도 준비한다.
 	String encodedUrl=URLEncoder.encode(url);
 
    // 1. 폼 전송되는 아이디, 비밀번호 읽어오기
-   request.setCharacterEncoding("utf-8");
    String id = request.getParameter("id");
    String pwd = request.getParameter("pwd");
 
@@ -30,7 +30,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>/users/login.jsp</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
