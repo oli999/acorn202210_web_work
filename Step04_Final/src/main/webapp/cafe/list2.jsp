@@ -101,12 +101,12 @@
 				 --%>
 				<c:if test="${startPageNum ne 1 }">
 					<li class="page-item">
-						<a class="page-link" href="list.jsp?pageNum=${startPageNum-1 }">Prev</a>
+						<a class="page-link" href="list2.jsp?pageNum=${startPageNum-1 }">Prev</a>
 					</li>
 				</c:if>
 				<c:forEach var="i" begin="${startPageNum }" end="${endPageNum }">
-					<li class="page-item ${startPageNum == i ? 'active':'' }">
-						<a class="page-link" href="list.jsp?pageNum=${i }">${i }</a>
+					<li class="page-item ${pageNum == i ? 'active':'' }">
+						<a class="page-link" href="list2.jsp?pageNum=${i }">${i }</a>
 					</li>
 				</c:forEach>
 				<%--
@@ -114,7 +114,7 @@
 				 --%>
 				<c:if test="${endPageNum lt totalPageCount }">
 					<li class="page-item">
-						<a class="page-link" href="list.jsp?pageNum=${endPageNum+1 }">Next</a>
+						<a class="page-link" href="list2.jsp?pageNum=${endPageNum+1 }">Next</a>
 					</li>
 				</c:if>
 			</ul>
